@@ -1,11 +1,26 @@
-import { ApolloClient,
-    InMemoryCache,
-    ApolloLink,
-    HttpLink,
-    ApolloProvider,
-    HttpLink
- } from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
 
- const HttpLink = new HttpLink({uri: 'http://localhost:4000/'})
+const GET_WEEK = gql`
+  query week($username: String!, $week: Int!) {
+    week(username: $username, week: $week) {
+      days {
+        exercises {
+          name
+          sets
+          reps
+          intensity
+          load
+          rpe
+        }
+      }
+    }
+  }
+`;
 
- 
+export const useWeekData = (username, week) => {
+  const { loading, error, data } = useQuery(GET_WEEK, {
+    variables: { username, week }
+  });
+
+  return { loading, error, data };
+};
