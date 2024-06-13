@@ -8,6 +8,10 @@ const Home = () => {
 
   if (loading) return <Text>LOADING USERDATA 👺👺👺👺👺</Text>;
   if (error) return <Text>💀💀💀 {error.message}</Text>;
+  console.log(data)
+ 
+  
+
 
   return (
     <View style={styles.container}>
