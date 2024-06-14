@@ -2,9 +2,10 @@ import { View, Text } from 'react-native'
 import React from 'react'
 
 const Login = () => {
+
   return (
     <View>
-      <Text>login</Text>
+      <Text style={{fontSize: 50, alignSelf: 'center'}}>login</Text>
     </View>
   )
 }

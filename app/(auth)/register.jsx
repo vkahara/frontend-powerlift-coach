@@ -1,10 +1,13 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
+import { router } from 'expo-router'
+import AppContext from '../../stateStore/usercontext'
 
 const Register = () => {
+    const user = useContext(AppContext)
   return (
     <View>
-      <Text>register</Text>
+      <Text onPress={() => router.push('(tabs)/home')}>register</Text>
     </View>
   )
 }

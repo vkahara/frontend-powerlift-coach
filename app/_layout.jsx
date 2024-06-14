@@ -1,4 +1,3 @@
-import { StyleSheet, View, Text } from "react-native";
 import React from "react";
 import { Stack } from "expo-router";
 import { ApolloProvider } from "@apollo/client";
@@ -10,13 +9,13 @@ const RootLayout = () => {
   const username = "valtteri";
   const week = 1;
   return (
-    <ApolloProvider client={client}>
-      <WeekDataProvider username={username} week={week}>
-        <Stack>
-          <Stack.Screen name='index' options={{ headerShown: false }} />
-        </Stack>
-      </WeekDataProvider>
-    </ApolloProvider>
+      <ApolloProvider client={client}>
+      <Stack>
+        <Stack.Screen name='(tabs)' options={{ headerShown: true }} />
+        <Stack.Screen name='(auth)' options={{ headerShown: true }} />
+        <Stack.Screen name='index' options={{ headerShown: true }} />
+      </Stack>
+    </ApolloProvider>  
   );
 };
 
