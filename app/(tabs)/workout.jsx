@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { useWeekData } from "../../fetching/week";
+import { useWeekData } from "../../contexts/WeekDataContext";
 
 const Workout = () => {
   return (
