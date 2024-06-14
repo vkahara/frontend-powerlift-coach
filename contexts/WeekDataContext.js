@@ -1,5 +1,5 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { useQuery, gql } from '@apollo/client';
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { useQuery, gql } from "@apollo/client";
 
 const WeekDataContext = createContext();
 
@@ -25,6 +25,7 @@ export const WeekDataProvider = ({ children, username, week }) => {
     variables: { username, week }
   });
   const [weekData, setWeekData] = useState(null);
+  const [selectedDay, setSelectedDay] = useState(null);
 
   useEffect(() => {
     if (data) {
@@ -33,7 +34,9 @@ export const WeekDataProvider = ({ children, username, week }) => {
   }, [data]);
 
   return (
-    <WeekDataContext.Provider value={{ weekData, loading, error }}>
+    <WeekDataContext.Provider
+      value={{ weekData, loading, error, selectedDay, setSelectedDay }}
+    >
       {children}
     </WeekDataContext.Provider>
   );

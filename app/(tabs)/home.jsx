@@ -2,8 +2,12 @@ import { View, Text, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { useWeekData } from "../../fetching/week";
+import { useRouter } from "expo-router";
 
 const Home = () => {
+  const { weekData, setSelectedDay } = useWeekData()
+  const router = useRouter()
+
   const { loading, error, data } = useWeekData("valtteri", 1);
 
   if (loading) return <Text>LOADING USERDATA 👺👺👺👺👺</Text>;
