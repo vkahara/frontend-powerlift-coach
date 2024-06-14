@@ -2,8 +2,12 @@ import { View, Text, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { useWeekData } from "../../fetching/week";
+import { useRouter } from "expo-router";
 
 const Home = () => {
+  const { weekData, setSelectedDay } = useWeekData()
+  const router = useRouter()
+
   const { loading, error, data } = useWeekData("valtteri", 1);
 
   if (loading) return <Text>LOADING USERDATA 👺👺👺👺👺</Text>;
@@ -15,10 +19,23 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <Text>home</Text>
-      {data.week.days.map((day, index) => (
-        <Text key={index}>Day {index + 1}</Text>
-      ))}
+      <LinearGradient
+        colors={["#2D5563", "#162A32"]}
+        style={styles.background}
+      />
+      <View style={styles.weekInfo}>
+        <View style={styles.rectangle9} />
+        <Text style={styles.daysOut}>112 Days Out</Text>
+        <Text style={styles.week}>Week 1</Text>
+      </View>
+      <View style={styles.buttonMenu}>
+        {data.week.days.map((day, index) => (
+          <View key={index} style={styles.button}>
+            <View style={styles.rectangle} />
+            <Text style={styles.day}>Day {index + 1}</Text>
+          </View>
+        ))}
+      </View>
     </View>
   );
 };
@@ -28,25 +45,95 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "#2D5563"
   },
   background: {
+    ...StyleSheet.absoluteFillObject
+  },
+  weekInfo: {
+    width: 347,
+    height: 177,
+    marginTop: 62,
+    marginHorizontal: 22,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    position: "relative"
+  },
+  rectangle9: {
     position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    height: 300
+    width: 347,
+    height: 177,
+    backgroundColor: "#1E3E49",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    borderRadius: 10
+  },
+  daysOut: {
+    position: "absolute",
+    width: 229,
+    height: 24,
+    left: 59,
+    top: 113,
+    fontFamily: "Inter",
+    fontStyle: "normal",
+    fontWeight: "600",
+    fontSize: 20,
+    lineHeight: 24,
+    textAlign: "center",
+    color: "#E9ECF5",
+    textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
+  },
+  week: {
+    position: "absolute",
+    width: 266,
+    height: 73,
+    left: 41,
+    top: 52,
+    fontFamily: "Inter",
+    fontStyle: "normal",
+    fontWeight: "900",
+    fontSize: 60,
+    lineHeight: 73,
+    textAlign: "center",
+    color: "#E9ECF5",
+    textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
+  },
+  buttonMenu: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "space-around",
+    marginTop: 20
   },
   button: {
-    padding: 15,
+    width: 322,
+    height: 60,
     alignItems: "center",
-    borderRadius: 5
+    justifyContent: "center",
+    marginBottom: 20
   },
-  text: {
-    backgroundColor: "transparent",
-    fontSize: 15,
-    color: "#fff"
+  rectangle: {
+    position: "absolute",
+    width: 322,
+    height: 60,
+    backgroundColor: "#379472",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    borderRadius: 10
+  },
+  day: {
+    fontFamily: "Inter",
+    fontStyle: "normal",
+    fontWeight: "600",
+    fontSize: 24,
+    lineHeight: 29,
+    textAlign: "center",
+    color: "#E9ECF5",
+    textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
   }
 });
