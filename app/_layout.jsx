@@ -9,13 +9,15 @@ const RootLayout = () => {
   const username = "valtteri";
   const week = 1;
   return (
-      <ApolloProvider client={client}>
-      <Stack>
-        <Stack.Screen name='(tabs)' options={{ headerShown: true }} />
-        <Stack.Screen name='(auth)' options={{ headerShown: true }} />
-        <Stack.Screen name='index' options={{ headerShown: true }} />
-      </Stack>
-    </ApolloProvider>  
+    <ApolloProvider client={client}>
+      <WeekDataProvider username={username} week={week}>
+        <Stack>
+          <Stack.Screen name='(tabs)' options={{ headerShown: true }} />
+          <Stack.Screen name='(auth)' options={{ headerShown: true }} />
+          <Stack.Screen name='index' options={{ headerShown: true }} />
+        </Stack>
+      </WeekDataProvider>
+    </ApolloProvider>
   );
 };
 
