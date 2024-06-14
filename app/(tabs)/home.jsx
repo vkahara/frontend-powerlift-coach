@@ -5,13 +5,15 @@ import { useWeekData } from "../../fetching/week";
 import { useRouter } from "expo-router";
 
 const Home = () => {
-  const { weekData, setSelectedDay } = useWeekData()
-  const router = useRouter()
+  const { weekData, setSelectedDay } = useWeekData();
+  const router = useRouter();
 
-  const { loading, error, data } = useWeekData("valtteri", 1);
+  if (!weekData) return <Text>LOADING USERDATA 👺👺👺👺👺</Text>;
 
-  if (loading) return <Text>LOADING USERDATA 👺👺👺👺👺</Text>;
-  if (error) return <Text>💀💀💀 {error.message}</Text>;
+  const handleDayPress = (dayIndex) => {
+    setSelectedDay(dayIndex);
+    router.push("tabs/workout");
+  };
 
   return (
     <View style={styles.container}>
@@ -25,8 +27,12 @@ const Home = () => {
         <Text style={styles.week}>Week 1</Text>
       </View>
       <View style={styles.buttonMenu}>
-        {data.week.days.map((day, index) => (
-          <View key={index} style={styles.button}>
+        {weekData.days.map((day, index) => (
+          <View
+            key={index}
+            style={styles.button}
+            onTouchEnd={() => handleDayPress(index)}
+          >
             <View style={styles.rectangle} />
             <Text style={styles.day}>Day {index + 1}</Text>
           </View>
