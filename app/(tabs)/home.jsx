@@ -1,21 +1,20 @@
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
-import { useWeekData } from "../../fetching/week";
+import { useWeekData } from "../../contexts/WeekDataContext";
 import { useRouter } from "expo-router";
 
 const Home = () => {
-  const { weekData, setSelectedDay } = useWeekData()
-  const router = useRouter()
-
-  const { loading, error, data } = useWeekData("valtteri", 1);
+  const { weekData, loading, error, setSelectedDay } = useWeekData();
+  const router = useRouter();
 
   if (loading) return <Text>LOADING USERDATA 👺👺👺👺👺</Text>;
   if (error) return <Text>💀💀💀 {error.message}</Text>;
-  console.log(data)
- 
-  
 
+  const handleDayPress = (dayIndex) => {
+    setSelectedDay(dayIndex);
+    router.push("modals/workout");
+  };
 
   return (
     <View style={styles.container}>
@@ -29,12 +28,17 @@ const Home = () => {
         <Text style={styles.week}>Week 1</Text>
       </View>
       <View style={styles.buttonMenu}>
-        {data.week.days.map((day, index) => (
-          <View key={index} style={styles.button}>
-            <View style={styles.rectangle} />
-            <Text style={styles.day}>Day {index + 1}</Text>
-          </View>
-        ))}
+        {weekData &&
+          weekData.days.map((day, index) => (
+            <View
+              key={index}
+              style={styles.button}
+              onTouchEnd={() => handleDayPress(index)}
+            >
+              <View style={styles.rectangle} />
+              <Text style={styles.day}>Day {index + 1}</Text>
+            </View>
+          ))}
       </View>
     </View>
   );
