@@ -13,16 +13,27 @@ const Workout = () => {
       <Text>Päivä numero {selectedDay + 1}</Text>
       {exercises.map((exercise, index) => (
         <View key={index}>
-          <Text>Exercise: {exercise.name}</Text>
-          <Text>Sets: {exercise.sets}</Text>
-          <Text>Reps: {exercise.reps}</Text>
-          <Text>Intensity: {exercise.intensity}</Text>
-          <Text>Load: {exercise.load}</Text>
-          <Text>RPE: {exercise.rpe}</Text>
-        </View>
+          <ExerciseBox exercise={exercise} />
+        </View>  
       ))}
-    </View>
+    </View>   
   );
 };
+
+const ExerciseBox = ({exercise}) => {
+
+  return(
+    <View>
+    {console.log("EXERCISEJKDSJFLDS", exercise)}
+    <Text>Exercise: {exercise.name}</Text>
+    <Text>Sets: {exercise.sets}</Text>
+    <Text>Reps: {exercise.reps}</Text>
+    <Text>Intensity: {exercise.intensity}</Text>
+    <Text>Load: {exercise.load}</Text>
+    <Text>RPE: {exercise.rpe}</Text>
+  </View>
+  )
+  
+}
 
 export default Workout;
